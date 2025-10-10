@@ -7,12 +7,6 @@ if (isset($_GET['edit'])) {
 }
 // Search form
 ?>
-<div class="nav">
-    <a href="dashboard.php">Dashboard</a>
-    <a href="index.php">Products</a>
-    <a href="sales.php">Sales/Expenses</a>
-    <a href="monthly_report.php">Monthly Report</a>
-</div>
 <form method="get" style="margin-bottom: 16px;">
     <input type="text" name="search" placeholder="Search product name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" style="padding:8px; border:1px solid #ccc; border-radius:4px; margin-right:8px;">
     <input type="submit" value="Search" style="background:#2980b9; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer;">
@@ -38,7 +32,7 @@ if (isset($_GET['edit'])) {
         echo '<tr>';
         echo '<td>' . htmlspecialchars($row['name']) . '</td>';
         echo '<td>' . number_format($row['price'], 2) . '</td>';
-        echo '<td><a href="?edit=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '">Edit</a></td>';
+        echo '<td><a href="?edit=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '">Edit</a> | <a href="?delete=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '" onclick="return confirm(\'Are you sure you want to delete this product?\')">Delete</a></td>';
         echo '</tr>';
     }
     ?>

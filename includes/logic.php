@@ -1,5 +1,5 @@
 <?php
-// Handle add/edit product
+// Handle add/edit/delete product
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_product'])) {
         $name = $_POST['product_name'];
@@ -19,6 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param('sdi', $name, $price, $id);
             $stmt->execute();
         }
+    }
+}
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    if ($id) {
+        $stmt = $conn->prepare('DELETE FROM products WHERE id=?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
     }
 }
 ?>
