@@ -7,6 +7,13 @@ if (isset($_GET['edit'])) {
 }
 // Search form
 ?>
+<div class="nav">
+    <a href="dashboard.php">Dashboard</a>
+    <a href="index.php">Products</a>
+    <a href="sales.php">Sales/Expenses</a>
+    <a href="expenses.php">Expenses</a>
+    <a href="sales_log.php">Sales Log</a>
+</div>
 <form method="get" style="margin-bottom: 16px;">
     <input type="text" name="search" placeholder="Search product name" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" style="padding:8px; border:1px solid #ccc; border-radius:4px; margin-right:8px;">
     <input type="submit" value="Search" style="background:#2980b9; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer;">
@@ -15,6 +22,7 @@ if (isset($_GET['edit'])) {
     <input type="hidden" name="product_id" value="<?php echo isset($product) ? $product['id'] : ''; ?>">
     <input type="text" name="product_name" placeholder="Product Name" value="<?php echo isset($product) ? $product['name'] : ''; ?>" required>
     <input type="number" name="product_price" placeholder="Price" step="0.01" value="<?php echo isset($product) ? $product['price'] : ''; ?>" required>
+    <input type="number" name="product_stock" placeholder="Stock" min="0" value="<?php echo isset($product) ? (isset($product['stock']) ? $product['stock'] : 0) : 0; ?>" required>
     <?php if (isset($product)) { ?>
         <input type="submit" name="edit_product" value="Update Product" style="background:#e67e22; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-right:8px;">
         <a href="index.php<?php echo isset($_GET['search']) ? '?search=' . urlencode($_GET['search']) : ''; ?>" style="background:#7f8c8d; color:#fff; padding:8px 16px; border-radius:4px; text-decoration:none;">Cancel</a>
@@ -23,7 +31,7 @@ if (isset($_GET['edit'])) {
     <?php } ?>
 </form>
 <table>
-    <tr><th>Name</th><th>Price</th><th>Action</th></tr>
+    <tr><th>Name</th><th>Price</th><th>Stock</th><th>Action</th></tr>
     <?php
     $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
     $query = $search ? "SELECT * FROM products WHERE name LIKE '%$search%'" : 'SELECT * FROM products';
@@ -32,7 +40,18 @@ if (isset($_GET['edit'])) {
         echo '<tr>';
         echo '<td>' . htmlspecialchars($row['name']) . '</td>';
         echo '<td>' . number_format($row['price'], 2) . '</td>';
-        echo '<td><a href="?edit=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '">Edit</a> | <a href="?delete=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '" onclick="return confirm(\'Are you sure you want to delete this product?\')">Delete</a></td>';
+        echo '<td>' . (isset($row['stock']) ? (int)$row['stock'] : 0) . '</td>';
+        echo '<td>';
+        echo '<a href="?edit=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '">Edit</a> | ';
+        echo '<a href="?delete=' . $row['id'] . ( $search ? '&search=' . urlencode($search) : '' ) . '" onclick="return confirm(\'Are you sure you want to delete this product?\')">Delete</a> | ';
+        // Sell form
+        echo '<form method="post" style="display:inline; margin:0; padding:0;" onsubmit="return confirm(\'Record this sale?\')">';
+        echo '<input type="hidden" name="sell_product_id" value="' . $row['id'] . '">';
+        echo '<input type="number" name="sell_quantity" min="1" value="1" style="width:50px; padding:2px 4px; margin-right:2px; border-radius:3px; border:1px solid #ccc;">';
+        echo '<input type="number" name="sell_price" min="0" step="0.01" value="' . $row['price'] . '" style="width:70px; padding:2px 4px; margin-right:2px; border-radius:3px; border:1px solid #ccc;">';
+        echo '<input type="submit" name="sell_product" value="Sell" style="background:#2980b9; color:#fff; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:0.95em;">';
+        echo '</form>';
+        echo '</td>';
         echo '</tr>';
     }
     ?>

@@ -15,8 +15,8 @@ include 'includes/db.php';
         <div class="nav">
             <a href="dashboard.php">Dashboard</a>
             <a href="index.php">Products</a>
-            <a href="sales.php">Sales/Expenses</a>
-            <a href="monthly_report.php">Monthly Report</a>
+            <a href="expenses.php">Expenses</a>
+            <a href="sales_log.php">Sales Log</a>
             <button id="darkModeToggle" class="btn" style="float:right;">🌙 Dark Mode</button>
         </div>
         <script>

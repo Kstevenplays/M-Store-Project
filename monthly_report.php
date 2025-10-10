@@ -15,8 +15,8 @@ include 'includes/db.php';
         <div class="nav">
             <a href="dashboard.php">Dashboard</a>
             <a href="index.php">Products</a>
-            <a href="sales.php">Sales/Expenses</a>
-            <a href="monthly_report.php">Monthly Report</a>
+            <a href="expenses.php">Expenses</a>
+            <a href="sales_log.php">Sales Log</a>
         </div>
         <form method="get" style="margin-bottom: 20px;">
             <label for="month">Select Month:</label>

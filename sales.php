@@ -7,17 +7,17 @@ include 'includes/logic.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Total Sales & Expenses</title>
+    <title>Sales</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Total Sales & Expenses</h1>
+        <h1>Sales</h1>
         <div class="nav">
             <a href="dashboard.php">Dashboard</a>
             <a href="index.php">Products</a>
-            <a href="sales.php">Sales/Expenses</a>
-            <a href="monthly_report.php">Monthly Report</a>
+            <a href="expenses.php">Expenses</a>
+            <a href="sales_log.php">Sales Log</a>
         </div>
         <?php include 'includes/sales.php'; ?>
     </div>
