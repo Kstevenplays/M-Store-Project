@@ -10,7 +10,7 @@ if (isset($_GET['edit'])) {
 <div class="nav">
     <a href="dashboard.php">Dashboard</a>
     <a href="index.php">Products</a>
-    <a href="sales.php">Sales/Expenses</a>
+    <a href="sales.php">Sales</a>
     <a href="expenses.php">Expenses</a>
     <a href="sales_log.php">Sales Log</a>
 </div>

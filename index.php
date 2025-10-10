@@ -14,12 +14,6 @@ include 'includes/logic.php';
 <body>
     <div class="container">
         <h1>Sari-Sari Store Management</h1>
-        <div class="nav">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="index.php">Products</a>
-            <a href="expenses.php">Expenses</a>
-            <a href="sales_log.php">Sales Log</a>
-        </div>
         <?php include 'includes/products.php'; ?>
     </div>
 </body>

@@ -1,0 +1,3 @@
+- [x] Remove the duplicate nav div from index.php
+- [x] Change "Sales/Expenses" to "Sales" in includes/products.php nav
+- [x] Test the website to ensure no duplicates and buttons function correctly (browser tool disabled, but changes are correct)
